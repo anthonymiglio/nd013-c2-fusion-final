@@ -144,6 +144,7 @@ To run this project in the workspace folder:
 python loop_over_dataset.py
 ```
 And in Set parameters and perform initializations, select an **exercise** to run: 'step1', 'step2', 'step3', 'step4'
+<img src="/img/exercise_selection.png"/>
 
 
 ### Step 1: Implement an Extended Kalman Filter:
