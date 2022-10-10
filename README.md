@@ -159,7 +159,7 @@ Result: The image below shows the analysis of RMSE for a single tracking.
 
 
 ### Step 2: Implement a Track Management:
-The second step is implementing track management, calculating the track score, and switching between initialized, tentative, and confirmed track states.
+The second step is implementing track management, calculating the track score, and track states: initialized, tentative, and confirmed.
 
 File: **student/trackmanagement.py**
 - First, initialize the track with an unassigned lidar calculation;
