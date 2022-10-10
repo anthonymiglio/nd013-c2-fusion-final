@@ -208,6 +208,7 @@ Implemented functions:
 
 Result: The video below shows frame-by-frame the camera-lidar fusion sensor front view and BEF(Birds Eye View)
 <img src="/img/my_tracking_results.gif">
+![my-tracking-results](https://user-images.githubusercontent.com/66563366/194797964-5c6dd9b9-bf59-4428-8edc-5759289be3d6.gif)
 
 
 
