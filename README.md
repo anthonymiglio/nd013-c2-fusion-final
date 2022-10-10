@@ -147,7 +147,7 @@ And in Set parameters and perform initializations, select an **exercise** to run
 
 
 ### Step 1: Implement an Extended Kalman Filter:
-Step 1 of the final project is an Extended Kalman Filter (EKF) implementation to track a real-world single-target scenario with lidar measurement input over time. 
+The first step is an Extended Kalman Filter (EKF) implementation to track a real-world single-target scenario with lidar measurement input over time. 
 In the student/filter.py file, There are two steps: predict and measure. The Prediction step predicts x and predicts P based on the motion model. The Measurement step is to update x and update P based on the measurement error and the covariances.
 
 Implemented functions in file: **student/filter.py**
@@ -159,7 +159,7 @@ Result: The image below shows the analysis of RMSE for a single tracking.
 
 
 ### Step 2: Implement a Track Management:
-Step 2 of the final project is implementing track management, calculating the track score, and switching between initialized, tentative, and confirmed track states.
+The second step is implementing track management, calculating the track score, and switching between initialized, tentative, and confirmed track states.
 
 File: **student/trackmanagement.py**
 - First, initialize the track with an unassigned lidar calculation;
