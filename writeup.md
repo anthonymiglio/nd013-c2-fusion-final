@@ -1,8 +1,5 @@
 # Writeup: Track 3D-Objects Over Time
 
-After completing the final project, we will have implemented a sensor fusion system that can track vehicles over time with a real-world camera and lidar measurements!
-
-
 ## The final project consists of four main steps: Filter, Track Management, Association, Camera Fusion.
 
 And some further analysis:
@@ -11,20 +8,26 @@ And some further analysis:
 ## 3. Which challenges will a sensor fusion system face in real-life scenarios? Did you see any of these challenges in the project?
 ## 4. Can you think of ways to improve your tracking results in the future?
 
+
+# Sensor Fusion and Object detection
+
+## Track 3D-Objects Over Time
+
+This project applies real-world data Waymo Open Dataset to implement a sensor fusion system that can track vehicles over time with a real-world camera and lidar measurements! And it consists of four main steps: Filter, Track Management, Association, Camera Fusion.
+
 To run this project in the workspace folder: 
 ```
 python loop_over_dataset.py
 ```
-And in Set parameters and perform initializations, select an exercise to run: 'step1', 'step2', 'step3', 'step4'
+And in Set parameters and perform initializations, select an **exercise** to run: 'step1', 'step2', 'step3', 'step4'
+<img src="/img/exercise_selection.png"/>
 
 
-**Here is a brief recap of the steps:**
-
-### Step 1: Implement an Extended Kalman Filter.
-Step 1 of the final project is an Extended Kalman Filter (EKF) implementation to track a real-world single-target scenario with lidar measurement input over time. 
+### Step 1: Implement an Extended Kalman Filter:
+The first step is an Extended Kalman Filter (EKF) implementation to track a real-world single-target scenario with lidar measurement input over time. 
 In the student/filter.py file, There are two steps: predict and measure. The Prediction step predicts x and predicts P based on the motion model. The Measurement step is to update x and update P based on the measurement error and the covariances.
 
-Implemented functions:
+Implemented functions in file: **student/filter.py**
 - *F* to calculate a system matrix for a constant velocity motion model in 3D, and *Q* the process noise covariance depending on the current timestep dt. This applies to a function *predict* to predict state x and estimation error covariance P to the next timestep, saving x and P in track.
 - Calculate *gamma* as the residual and *S* as the covariance of the residual. This applies to a function *update* to update state x and covariance P with associated measurement, saving x and P in track.
 
@@ -32,10 +35,10 @@ Result: The image below shows the analysis of RMSE for a single tracking.
 <img src="/img/step1_rmse_single_target_tracking.png"/>
 
 
-### Step 2: Implement a Track Management
-Step 2 of the final project is implementing track management, calculating the track score, and switching between initialized, tentative, and confirmed track states.
+### Step 2: Implement a Track Management:
+The second step is implementing track management, calculating the track score, and track states: initialized, tentative, and confirmed.
 
-**File:** trackmanagement.py
+File: **student/trackmanagement.py**
 - First, initialize the track with an unassigned lidar calculation;
 - Track state is defined according to track score;
 - If the track score is correlated with measurement, the corresponding scores will be increased, or if not, the track score will decrease.
@@ -46,10 +49,10 @@ Result: The image below shows the analysis of RMSE for a single tracking.
 <img src="/img/step2_rmse_single_target_tracking.png"/>
 
 
-### Step 3: Implement SNN Data Association and Gating
+### Step 3: Implement SNN Data Association and Gating:
 The third step is to implement the association of measurements to tracks and to handle unassociated tracks and measurements. We use a single nearest neighbor data association measured by Mahalanobis distance and use gating to ease associations.
 
-**File:** association.py
+File: **student/association.py**
 - Create an association matrix with N tracks by M measurements;
 - Initialize association matrix with infinite values;
 - Loop over all tracks and all measurements to set up an association matrix:
@@ -61,19 +64,17 @@ Result: The image below shows the analysis of RMSE for SNN Data Association:
 <img src="/img/step3_rmse_lidar.png"/>
 
 
-### Step 4: Apply sensor fusion by implementing the nonlinear camera measurement model and a sensor visibility check.
+### Step 4: Apply sensor fusion by implementing the nonlinear camera measurement model and a sensor visibility check:
 The fourth step is to implement camera-lidar fusion, making the extended Kalman filter support the nonlinear transformation of the camera measurement and linear for lidar measurement. The projection matrix converts real-world 3D points to picture 2D points. Use partial derivatives of x, y, and z to measure the model in u,v parameters.
 
-**File:** measurements.py
-Implemented functions:
+Implemented functions in File: **student/measurements.py**
 - *in_fov* checks whether an object x lies in the sensor's field of view. 
 - *get_hx* calculates the nonlinear measurement expectation value h(x) for the camera sensor.
 - *generate_measurement* creates a new measurement from this sensor and adds it to the measurement list.
 - and the *Measurement* class, create a measurement object that initializes the camera measurement of vector z, noise covariance matrix R, for the camera sensor.
 
 Result: The video below shows frame-by-frame the camera-lidar fusion sensor front view and BEF(Birds Eye View)
-<video src="/results/my_tracking_results.avi">
-
+![my-tracking-results](https://user-images.githubusercontent.com/66563366/194797964-5c6dd9b9-bf59-4428-8edc-5759289be3d6.gif)
 
 
 ### 1. Which part of the project was most difficult for you to complete, and why?
@@ -93,6 +94,9 @@ In real-life scenarios:
 - Periodic sensor calibration is crucial for precise coordinate translation from the sensor to the vehicle.
 - The unpredictability of the weather conditions might impact sensor performance in situations such as fog, heavy rain, direct sun rays, etc.
 - Heavy traffic increases the number of cars on the road, while light traffic increases the need for a reaction time for breaking or deviating.
+
+In this project:
+The extrinsic parameters are defined, and there is no need for the camera and lidar calibration because open-source Waymo data is being used, and these parameters are assumed correct.
 
 
 ### 4. Can you think of ways to improve your tracking results in the future?
