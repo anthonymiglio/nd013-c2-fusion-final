@@ -207,7 +207,7 @@ Implemented functions:
 - and the *Measurement* class, create a measurement object that initializes the camera measurement of vector z, noise covariance matrix R, for the camera sensor.
 
 Result: The video below shows frame-by-frame the camera-lidar fusion sensor front view and BEF(Birds Eye View)
-<video src="/results/my_tracking_results.avi">
+<img src="/results/my_tracking_results.gif">
 
 
 
